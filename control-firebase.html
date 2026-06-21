@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WP Snooker Control Firebase</title>
+
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#111;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+h1{
+color:gold;
+}
+
+.card{
+background:#222;
+padding:15px;
+margin:15px 0;
+border-radius:12px;
+}
+
+input{
+width:90%;
+padding:12px;
+font-size:18px;
+margin:5px;
+border-radius:8px;
+border:none;
+}
+
+button{
+padding:12px;
+margin:4px;
+font-size:18px;
+border:none;
+border-radius:8px;
+}
+
+.green{background:#28a745;color:white;}
+.blue{background:#007bff;color:white;}
+.red{background:#dc3545;color:white;}
+</style>
+</head>
+
+<body>
+
+<h1>WP Snooker Club</h1>
+
+<div class="card">
+<h2>ผู้เล่น A</h2>
+<input id="playerA" value="นักกีฬา A">
+<br>
+<button class="green" onclick="addScoreA(1)">+1</button>
+<button class="green" onclick="addScoreA(2)">+2</button>
+<button class="green" onclick="addScoreA(3)">+3</button>
+<button class="green" onclick="addScoreA(4)">+4</button>
+<button class="green" onclick="addScoreA(5)">+5</button>
+<button class="green" onclick="addScoreA(6)">+6</button>
+<button class="green" onclick="addScoreA(7)">+7</button>
+<br><br>
+<button class="blue" onclick="frameA()">Frame +1</button>
+</div>
+
+<div class="card">
+<h2>ผู้เล่น B</h2>
+<input id="playerB" value="นักกีฬา B">
+<br>
+<button class="green" onclick="addScoreB(1)">+1</button>
+<button class="green" onclick="addScoreB(2)">+2</button>
+<button class="green" onclick="addScoreB(3)">+3</button>
+<button class="green" onclick="addScoreB(4)">+4</button>
+<button class="green" onclick="addScoreB(5)">+5</button>
+<button class="green" onclick="addScoreB(6)">+6</button>
+<button class="green" onclick="addScoreB(7)">+7</button>
+<br><br>
+<button class="blue" onclick="frameB()">Frame +1</button>
+</div>
+
+<div class="card">
+<h2>Break</h2>
+<button class="green" onclick="addBreak()">+1</button>
+<button class="red" onclick="resetBreak()">Reset Break</button>
+</div>
+
+<div class="card">
+<button class="blue" onclick="saveNames()">บันทึกชื่อ</button>
+<button class="red" onclick="resetMatch()">Reset Match</button>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getDatabase, ref, get, update, set } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDIFnGZscfbuaST3cLkl--cTPAjqHm75zI",
+  authDomain: "wp-snooker-club.firebaseapp.com",
+  databaseURL: "https://wp-snooker-club-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "wp-snooker-club",
+  storageBucket: "wp-snooker-club.firebasestorage.app",
+  messagingSenderId: "825086242132",
+  appId: "1:825086242132:web:54f00b00f84e33aa662cc1"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+window.saveNames = async () => {
+await update(ref(db,"match"),{
+playerA:document.getElementById("playerA").value,
+playerB:document.getElementById("playerB").value
+});
+};
+
+window.addScoreA = async (n) => {
+const s = await get(ref(db,"match"));
+const d = s.val() || {};
+await update(ref(db,"match"),{
+scoreA:(d.scoreA||0)+n
+});
+};
+
+window.addScoreB = async (n) => {
+const s = await get(ref(db,"match"));
+const d = s.val() || {};
+await update(ref(db,"match"),{
+scoreB:(d.scoreB||0)+n
+});
+};
+
+window.frameA = async () => {
+const s = await get(ref(db,"match"));
+const d = s.val() || {};
+await update(ref(db,"match"),{
+frameA:(d.frameA||0)+1
+});
+};
+
+window.frameB = async () => {
+const s = await get(ref(db,"match"));
+const d = s.val() || {};
+await update(ref(db,"match"),{
+frameB:(d.frameB||0)+1
+});
+};
+
+window.addBreak = async () => {
+const s = await get(ref(db,"match"));
+const d = s.val() || {};
+await update(ref(db,"match"),{
+breakScore:(d.breakScore||0)+1
+});
+};
+
+window.resetBreak = async () => {
+await update(ref(db,"match"),{
+breakScore:0
+});
+};
+
+window.resetMatch = async () => {
+await set(ref(db,"match"),{
+playerA:"นักกีฬา A",
+playerB:"นักกีฬา B",
+scoreA:0,
+scoreB:0,
+frameA:0,
+frameB:0,
+breakScore:0
+});
+};
+</script>
+
+</body>
+</html>
