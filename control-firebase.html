@@ -35,10 +35,20 @@ margin:4px;
 font-size:18px;
 border:none;
 border-radius:8px;
+cursor:pointer;
 }
-.green{background:#28a745;color:white;}
-.blue{background:#007bff;color:white;}
-.red{background:#dc3545;color:white;}
+.green{
+background:#28a745;
+color:white;
+}
+.blue{
+background:#007bff;
+color:white;
+}
+.red{
+background:#dc3545;
+color:white;
+}
 </style>
 </head>
 <body>
@@ -46,8 +56,8 @@ border-radius:8px;
 <div class="card">
 <h2>ข้อมูลเพิ่มเติม</h2>
 <input id="topMessage" placeholder="ข้อความด้านบน">
-<input id="totalA" type="number" placeholder="คะแนนรวม A" value="0">
-<input id="totalB" type="number" placeholder="คะแนนรวม B" value="0">
+<input id="totalA" type="number" value="0" placeholder="คะแนนรวม A">
+<input id="totalB" type="number" value="0" placeholder="คะแนนรวม B">
 <input id="bottomMessage" placeholder="ข้อความด้านล่าง">
 <button class="blue" onclick="saveExtra()">
 บันทึกข้อมูลเพิ่มเติม
@@ -66,6 +76,14 @@ border-radius:8px;
 +6
 +7
 
+-1
+-2
+-3
+-4
+-5
+-6
+-7
+
 Frame +1
 Frame -1
 
@@ -82,6 +100,14 @@ Frame -1
 +5
 +6
 +7
+
+-1
+-2
+-3
+-4
+-5
+-6
+-7
 
 Frame +1
 Frame -1
@@ -118,28 +144,24 @@ playerB:document.getElementById("playerB").value
 };
 window.saveExtra = async () => {
 await update(ref(db,"match"),{
-topMessage:
-document.getElementById("topMessage").value,
-totalA:
-Number(document.getElementById("totalA").value),
-totalB:
-Number(document.getElementById("totalB").value),
-bottomMessage:
-document.getElementById("bottomMessage").value
+topMessage:document.getElementById("topMessage").value,
+bottomMessage:document.getElementById("bottomMessage").value,
+totalA:Number(document.getElementById("totalA").value),
+totalB:Number(document.getElementById("totalB").value)
 });
 };
 window.addScoreA = async (n) => {
 const s = await get(ref(db,"match"));
 const d = s.val() || {};
 await update(ref(db,"match"),{
-scoreA:(d.scoreA||0)+n
+scoreA:Math.max((d.scoreA||0)+n,0)
 });
 };
 window.addScoreB = async (n) => {
 const s = await get(ref(db,"match"));
 const d = s.val() || {};
 await update(ref(db,"match"),{
-scoreB:(d.scoreB||0)+n
+scoreB:Math.max((d.scoreB||0)+n,0)
 });
 };
 window.frameA = async () => {
