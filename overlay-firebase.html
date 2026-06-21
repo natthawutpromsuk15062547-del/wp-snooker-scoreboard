@@ -2,8 +2,9 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>WP Snooker Firebase Overlay</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WP Snooker Overlay</title>
 
 <style>
 body{
@@ -13,63 +14,78 @@ font-family:Arial,sans-serif;
 }
 
 .overlay{
-position:fixed;
-bottom:20px;
-left:50%;
-transform:translateX(-50%);
-width:1200px;
-background:rgba(0,0,0,.9);
-border:3px solid gold;
-border-radius:20px;
+width:100%;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.scoreboard{
+width:90%;
+background:#111;
+border-top:4px solid gold;
+border-bottom:4px solid gold;
 color:white;
+padding:20px;
 }
 
 .header{
 text-align:center;
-padding:10px;
-font-size:34px;
+margin-bottom:20px;
+}
+
+.header img{
+height:180px;
+}
+
+#winnerBox{
+display:none;
+font-size:48px;
 font-weight:bold;
 color:gold;
 }
 
-.scoreboard{
+.score-row{
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:20px;
 }
 
 .player{
-width:35%;
-text-align:center;
+width:30%;
+}
+
+.player.right{
+text-align:right;
 }
 
 .name{
-font-size:32px;
+font-size:28px;
 font-weight:bold;
 }
 
 .score{
 font-size:72px;
-color:gold;
 font-weight:bold;
+color:gold;
 }
 
 .center{
-width:30%;
+width:40%;
 text-align:center;
 }
 
 .frame{
 font-size:42px;
-color:gold;
 font-weight:bold;
+color:gold;
 }
 
 .breakbox{
 text-align:center;
-padding:10px;
-font-size:26px;
+padding-top:20px;
+font-size:28px;
 }
 </style>
 </head>
@@ -78,18 +94,21 @@ font-size:26px;
 
 <div class="overlay">
 
+<div class="scoreboard">
+
 <div class="header">
-WP Snooker Club
-</div>
-  
-  <div id="winnerBox" style="display:none;text-align:center;">
-  <img id="winnerLogo" src="wp-logo.png" style="width:180px;">
-  <div id="winnerName"
-       style="font-size:50px;color:gold;font-weight:bold;">
-  </div>
+
+<div id="logoBox">
+<img src="wp-logo.png">
 </div>
 
-<div class="scoreboard">
+<div id="winnerBox">
+🏆 <span id="winnerName"></span>
+</div>
+
+</div>
+
+<div class="score-row">
 
 <div class="player">
 <div class="name" id="playerA">นักกีฬา A</div>
@@ -99,13 +118,13 @@ WP Snooker Club
 <div class="center">
 <div class="frame">
 <span id="frameA">0</span>
--
+ -
 <span id="frameB">0</span>
 </div>
 FRAME
 </div>
 
-<div class="player">
+<div class="player right">
 <div class="name" id="playerB">นักกีฬา B</div>
 <div class="score" id="scoreB">0</div>
 </div>
@@ -118,45 +137,79 @@ Break :
 </div>
 
 </div>
+
+</div>
+
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getDatabase,
+ref,
+onValue
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDIFnGZscfbuaST3cLkl--cTPAjqHm75zI",
-  authDomain: "wp-snooker-club.firebaseapp.com",
-  databaseURL: "https://wp-snooker-club-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "wp-snooker-club",
-  storageBucket: "wp-snooker-club.firebasestorage.app",
-  messagingSenderId: "825086242132",
-  appId: "1:825086242132:web:54f00b00f84e33aa662cc1"
+apiKey: "AIzaSyDIFnGZscfbuaST3cLkl--cTPAjqHm75zI",
+authDomain: "wp-snooker-club.firebaseapp.com",
+databaseURL: "https://wp-snooker-club-default-rtdb.asia-southeast1.firebasedatabase.app",
+projectId: "wp-snooker-club",
+storageBucket: "wp-snooker-club.firebasestorage.app",
+messagingSenderId: "825086242132",
+appId: "1:825086242132:web:54f00b00f84e33aa662cc1"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-onValue(ref(db, "match"), (snapshot) => {
-  const data = snapshot.val();
-  if (!data) return;
+onValue(ref(db,"match"),(snapshot)=>{
 
-  document.getElementById("playerA").textContent = data.playerA || "นักกีฬา A";
-  document.getElementById("playerB").textContent = data.playerB || "นักกีฬา B";
+const data = snapshot.val();
 
-  document.getElementById("scoreA").textContent = data.scoreA || 0;
-  document.getElementById("scoreB").textContent = data.scoreB || 0;
+if(!data) return;
 
-  document.getElementById("frameA").textContent = data.frameA || 0;
-  document.getElementById("frameB").textContent = data.frameB || 0;
+document.getElementById("playerA").textContent =
+data.playerA || "นักกีฬา A";
 
-  document.getElementById("breakScore").textContent = data.breakScore || 0;
-  if(data.Winner){
-  document.getElementById("winnerBox").style.display="block";
-  document.getElementById("winnerName").textContent =
-    "🏆 " + data.Winner + " ชนะ";
+document.getElementById("playerB").textContent =
+data.playerB || "นักกีฬา B";
+
+document.getElementById("scoreA").textContent =
+data.scoreA || 0;
+
+document.getElementById("scoreB").textContent =
+data.scoreB || 0;
+
+document.getElementById("frameA").textContent =
+data.frameA || 0;
+
+document.getElementById("frameB").textContent =
+data.frameB || 0;
+
+document.getElementById("breakScore").textContent =
+data.breakScore || 0;
+
+if(data.Winner && data.Winner !== ""){
+
+document.getElementById("logoBox").style.display="none";
+document.getElementById("winnerBox").style.display="block";
+
+document.getElementById("winnerName").textContent =
+data.Winner + " ชนะ";
+
 }else{
-  document.getElementById("winnerBox").style.display="none";
+
+document.getElementById("logoBox").style.display="block";
+document.getElementById("winnerBox").style.display="none";
+
 }
+
 });
+
 </script>
+
 </body>
 </html>
