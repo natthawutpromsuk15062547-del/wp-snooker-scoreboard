@@ -12,29 +12,32 @@ font-family:Arial,sans-serif;
 }
 #topMessage{
 position:absolute;
-bottom:145px;
+bottom:105px;
 left:50%;
 transform:translateX(-50%);
 background:#111;
 border:2px solid #f5c400;
-border-radius:20px;
-padding:8px 25px;
+border-radius:12px;
+padding:3px 12px;
 color:#ffd700;
-font-size:24px;
+font-size:15px;
 font-weight:bold;
+white-space:nowrap;
 }
 #scorebar{
 position:absolute;
-bottom:60px;
+bottom:25px;
 left:50%;
 transform:translateX(-50%);
-width:80%;
-max-width:900px;
+width:68%;
+max-width:700px;
 background:#111;
 border:3px solid #f5c400;
-border-radius:25px;
-padding:8px 15px;
-}
+border-radius:20px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:6px 12px;
 box-sizing:border-box;
 color:white;
 }
@@ -43,30 +46,39 @@ width:35%;
 text-align:center;
 }
 .name{
+font-size:18px;
+font-weight:bold;
+}
+.score{
+font-size:32px;
+font-weight:bold;
+color:#ffd700;
+line-height:1;
+}
+.total{
+font-size:12px;
+margin-top:2px;
+color:#ddd;
+}
+.center{
+width:30%;
+text-align:center;
+}
+.frame{
 font-size:22px;
 font-weight:bold;
-}
-
-.score{
-font-size:42px;
-font-weight:bold;
 color:#ffd700;
+line-height:1;
 }
-
-.total{
-font-size:16px;
-}
-
-.frame{
-font-size:30px;
-font-weight:bold;
-color:#ffd700;
-
+.frameText{
+font-size:12px;
+margin-top:2px;
 }
 .bottomText{
-margin-top:12px;
-font-size:16px;
-color:white;
+margin-top:5px;
+font-size:11px;
+color:#ddd;
+line-height:1.2;
 }
 </style>
 </head>
@@ -76,7 +88,9 @@ color:white;
 <div class="player">
 <div class="name" id="playerA">Player A</div>
 <div class="score" id="scoreA">0</div>
-<div class="total">รวม : <span id="totalA">0</span></div>
+<div class="total">
+รวม : <span id="totalA">0</span>
+</div>
 </div>
 <div class="center">
 <div class="frame">
@@ -84,7 +98,7 @@ color:white;
  -
 <span id="frameB">0</span>
 </div>
-<div>FRAME</div>
+<div class="frameText">FRAME</div>
 <div class="bottomText" id="bottomMessage">
 ถ่ายทอดสดโดย WP Snooker Club
 </div>
@@ -92,7 +106,9 @@ color:white;
 <div class="player">
 <div class="name" id="playerB">Player B</div>
 <div class="score" id="scoreB">0</div>
-<div class="total">รวม : <span id="totalB">0</span></div>
+<div class="total">
+รวม : <span id="totalB">0</span>
+</div>
 </div>
 </div>
 <script type="module">
