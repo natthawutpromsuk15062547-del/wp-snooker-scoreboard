@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WP Snooker Firebase Overlay</title>
+
+<style>
+body{
+margin:0;
+background:transparent;
+font-family:Arial,sans-serif;
+}
+
+.overlay{
+position:fixed;
+bottom:20px;
+left:50%;
+transform:translateX(-50%);
+width:1200px;
+background:rgba(0,0,0,.9);
+border:3px solid gold;
+border-radius:20px;
+color:white;
+}
+
+.header{
+text-align:center;
+padding:10px;
+font-size:34px;
+font-weight:bold;
+color:gold;
+}
+
+.scoreboard{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px;
+}
+
+.player{
+width:35%;
+text-align:center;
+}
+
+.name{
+font-size:32px;
+font-weight:bold;
+}
+
+.score{
+font-size:72px;
+color:gold;
+font-weight:bold;
+}
+
+.center{
+width:30%;
+text-align:center;
+}
+
+.frame{
+font-size:42px;
+color:gold;
+font-weight:bold;
+}
+
+.breakbox{
+text-align:center;
+padding:10px;
+font-size:26px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="overlay">
+
+<div class="header">
+WP Snooker Club
+</div>
+
+<div class="scoreboard">
+
+<div class="player">
+<div class="name" id="playerA">นักกีฬา A</div>
+<div class="score" id="scoreA">0</div>
+</div>
+
+<div class="center">
+<div class="frame">
+<span id="frameA">0</span>
+-
+<span id="frameB">0</span>
+</div>
+FRAME
+</div>
+
+<div class="player">
+<div class="name" id="playerB">นักกีฬา B</div>
+<div class="score" id="scoreB">0</div>
+</div>
+
+</div>
+
+<div class="breakbox">
+Break :
+<span id="breakScore">0</span>
+</div>
+
+</div>
+
+</body>
+</html>
