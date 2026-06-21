@@ -65,6 +65,7 @@ border-radius:8px;
 <button class="green" onclick="addScoreA(7)">+7</button>
 <br><br>
 <button class="blue" onclick="frameA()">Frame +1</button>
+<button class="red" onclick="minusFrameA()">Frame -1</button>
 </div>
 
 <div class="card">
@@ -80,6 +81,7 @@ border-radius:8px;
 <button class="green" onclick="addScoreB(7)">+7</button>
 <br><br>
 <button class="blue" onclick="frameB()">Frame +1</button>
+<button class="red" onclick="minusFrameB()">Frame -1</button>
 </div>
 
 <div class="card">
@@ -173,6 +175,23 @@ frameA:0,
 frameB:0,
 breakScore:0
 });
+};
+window.minusFrameA = async () => {
+ const s = await get(ref(db,"match"));
+ const d = s.val() || {};
+
+ await update(ref(db,"match"),{
+  frameA: Math.max((d.frameA||0)-1,0)
+ });
+};
+
+window.minusFrameB = async () => {
+ const s = await get(ref(db,"match"));
+ const d = s.val() || {};
+
+ await update(ref(db,"match"),{
+  frameB: Math.max((d.frameB||0)-1,0)
+ });
 };
 </script>
 
