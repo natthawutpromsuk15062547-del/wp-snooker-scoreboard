@@ -111,6 +111,38 @@ Break :
 </div>
 
 </div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
+const firebaseConfig = {
+  apiKey: "AIzaSyDIFnGZscfbuaST3cLkl--cTPAjqHm75zI",
+  authDomain: "wp-snooker-club.firebaseapp.com",
+  databaseURL: "https://wp-snooker-club-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "wp-snooker-club",
+  storageBucket: "wp-snooker-club.firebasestorage.app",
+  messagingSenderId: "825086242132",
+  appId: "1:825086242132:web:54f00b00f84e33aa662cc1"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+onValue(ref(db, "match"), (snapshot) => {
+  const data = snapshot.val();
+  if (!data) return;
+
+  document.getElementById("playerA").textContent = data.playerA || "นักกีฬา A";
+  document.getElementById("playerB").textContent = data.playerB || "นักกีฬา B";
+
+  document.getElementById("scoreA").textContent = data.scoreA || 0;
+  document.getElementById("scoreB").textContent = data.scoreB || 0;
+
+  document.getElementById("frameA").textContent = data.frameA || 0;
+  document.getElementById("frameB").textContent = data.frameB || 0;
+
+  document.getElementById("breakScore").textContent = data.breakScore || 0;
+});
+</script>
 </body>
 </html>
