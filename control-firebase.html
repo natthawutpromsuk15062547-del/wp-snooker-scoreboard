@@ -37,9 +37,51 @@ border:none;
 border-radius:8px;
 cursor:pointer;
 }
-.green{background:#28a745;color:white;}
-.blue{background:#007bff;color:white;}
-.red{background:#dc3545;color:white;}
+..redball{
+background:#d60000;
+color:white;
+}
+
+.yellowball{
+background:#ffd700;
+color:black;
+}
+
+.greenball{
+background:#00a651;
+color:white;
+}
+
+.brownball{
+background:#8b4513;
+color:white;
+}
+
+.blueball{
+background:#0066ff;
+color:white;
+}
+
+.pinkball{
+background:#ff69b4;
+color:white;
+}
+
+.blackball{
+background:#000;
+color:white;
+border:1px solid #666;
+}
+
+.blue{
+background:#007bff;
+color:white;
+}
+
+.red{
+background:#dc3545;
+color:white;
+}
 </style>
 </head>
 <body>
@@ -61,23 +103,23 @@ cursor:pointer;
 
 <br>
 
-<button class="green" onclick="addScoreA(1)">+1</button>
-<button class="green" onclick="addScoreA(2)">+2</button>
-<button class="green" onclick="addScoreA(3)">+3</button>
-<button class="green" onclick="addScoreA(4)">+4</button>
-<button class="green" onclick="addScoreA(5)">+5</button>
-<button class="green" onclick="addScoreA(6)">+6</button>
-<button class="green" onclick="addScoreA(7)">+7</button>
+<button class="redball" onclick="addScoreA(1)">แดง 1</button>
+<button class="yellowball" onclick="addScoreA(2)">เหลือง 2</button>
+<button class="greenball" onclick="addScoreA(3)">เขียว 3</button>
+<button class="brownball" onclick="addScoreA(4)">น้ำตาล 4</button>
+<button class="blueball" onclick="addScoreA(5)">น้ำเงิน 5</button>
+<button class="pinkball" onclick="addScoreA(6)">ชมพู 6</button>
+<button class="blackball" onclick="addScoreA(7)">ดำ 7</button>
 
 <br><br>
 
-<button class="red" onclick="addScoreA(-1)">-1</button>
-<button class="red" onclick="addScoreA(-2)">-2</button>
-<button class="red" onclick="addScoreA(-3)">-3</button>
-<button class="red" onclick="addScoreA(-4)">-4</button>
-<button class="red" onclick="addScoreA(-5)">-5</button>
-<button class="red" onclick="addScoreA(-6)">-6</button>
-<button class="red" onclick="addScoreA(-7)">-7</button>
+<button class="redball" onclick="addScoreA(-1)">-แดง</button>
+<button class="yellowball" onclick="addScoreA(-2)">-เหลือง</button>
+<button class="greenball" onclick="addScoreA(-3)">-เขียว</button>
+<button class="brownball" onclick="addScoreA(-4)">-น้ำตาล</button>
+<button class="blueball" onclick="addScoreA(-5)">-น้ำเงิน</button>
+<button class="pinkball" onclick="addScoreA(-6)">-ชมพู</button>
+<button class="blackball" onclick="addScoreA(-7)">-ดำ</button>
 
 <br><br>
 
@@ -93,24 +135,22 @@ cursor:pointer;
 
 <br>
 
-<button class="green" onclick="addScoreB(1)">+1</button>
-<button class="green" onclick="addScoreB(2)">+2</button>
-<button class="green" onclick="addScoreB(3)">+3</button>
-<button class="green" onclick="addScoreB(4)">+4</button>
-<button class="green" onclick="addScoreB(5)">+5</button>
-<button class="green" onclick="addScoreB(6)">+6</button>
-<button class="green" onclick="addScoreB(7)">+7</button>
-
+<button class="redball" onclick="addScoreB(1)">แดง 1</button>
+<button class="yellowball" onclick="addScoreB(2)">เหลือง 2</button>
+<button class="greenball" onclick="addScoreB(3)">เขียว 3</button>
+<button class="brownball" onclick="addScoreB(4)">น้ำตาล 4</button>
+<button class="blueball" onclick="addScoreB(5)">น้ำเงิน 5</button>
+<button class="pinkball" onclick="addScoreB(6)">ชมพู 6</button>
+<button class="blackball" onclick="addScoreB(7)">ดำ 7</button>
 <br><br>
 
-<button class="red" onclick="addScoreB(-1)">-1</button>
-<button class="red" onclick="addScoreB(-2)">-2</button>
-<button class="red" onclick="addScoreB(-3)">-3</button>
-<button class="red" onclick="addScoreB(-4)">-4</button>
-<button class="red" onclick="addScoreB(-5)">-5</button>
-<button class="red" onclick="addScoreB(-6)">-6</button>
-<button class="red" onclick="addScoreB(-7)">-7</button>
-
+<button class="redball" onclick="addScoreB(-1)">-แดง</button>
+<button class="yellowball" onclick="addScoreB(-2)">-เหลือง</button>
+<button class="greenball" onclick="addScoreB(-3)">-เขียว</button>
+<button class="brownball" onclick="addScoreB(-4)">-น้ำตาล</button>
+<button class="blueball" onclick="addScoreB(-5)">-น้ำเงิน</button>
+<button class="pinkball" onclick="addScoreB(-6)">-ชมพู</button>
+<button class="blackball" onclick="addScoreB(-7)">-ดำ</button>
 <br><br>
 
 <button class="blue" onclick="frameB()">Frame +1</button>
