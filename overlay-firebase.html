@@ -12,7 +12,7 @@ font-family:Arial,sans-serif;
 }
 #topMessage{
 position:absolute;
-bottom:170px;
+bottom:145px;
 left:50%;
 transform:translateX(-50%);
 background:#111;
@@ -25,7 +25,7 @@ font-weight:bold;
 }
 #scorebar{
 position:absolute;
-bottom:60px;
+bottom:20px;
 left:50%;
 transform:translateX(-50%);
 width:90%;
@@ -36,7 +36,7 @@ border-radius:30px;
 display:flex;
 align-items:center;
 justify-content:space-between;
-padding:10px 25px;
+padding:15px 25px;
 box-sizing:border-box;
 color:white;
 }
@@ -55,7 +55,7 @@ color:#ffd700;
 }
 .total{
 font-size:18px;
-margin-top:5px;
+margin-top:8px;
 color:#ddd;
 }
 .center{
@@ -67,17 +67,10 @@ font-size:36px;
 font-weight:bold;
 color:#ffd700;
 }
-#bottomMessage{
-position:absolute;
-bottom:10px;
-left:50%;
-transform:translateX(-50%);
-background:#111;
-border:2px solid #f5c400;
-border-radius:20px;
-padding:6px 20px;
+.bottomText{
+margin-top:12px;
+font-size:16px;
 color:white;
-font-size:18px;
 }
 </style>
 </head>
@@ -96,6 +89,9 @@ font-size:18px;
 <span id="frameB">0</span>
 </div>
 <div>FRAME</div>
+<div class="bottomText" id="bottomMessage">
+ถ่ายทอดสดโดย WP Snooker Club
+</div>
 </div>
 <div class="player">
 <div class="name" id="playerB">Player B</div>
@@ -103,7 +99,6 @@ font-size:18px;
 <div class="total">รวม : <span id="totalB">0</span></div>
 </div>
 </div>
-<div id="bottomMessage">ถ่ายทอดสดโดย WP Snooker Club</div>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getDatabase, ref, onValue }
@@ -122,14 +117,22 @@ const db = getDatabase(app);
 onValue(ref(db,"match"), (snapshot)=>{
 const data = snapshot.val();
 if(!data) return;
-document.getElementById("playerA").textContent = data.playerA || "Player A";
-document.getElementById("playerB").textContent = data.playerB || "Player B";
-document.getElementById("scoreA").textContent = data.scoreA || 0;
-document.getElementById("scoreB").textContent = data.scoreB || 0;
-document.getElementById("frameA").textContent = data.frameA || 0;
-document.getElementById("frameB").textContent = data.frameB || 0;
-document.getElementById("totalA").textContent = data.totalA || 0;
-document.getElementById("totalB").textContent = data.totalB || 0;
+document.getElementById("playerA").textContent =
+data.playerA || "Player A";
+document.getElementById("playerB").textContent =
+data.playerB || "Player B";
+document.getElementById("scoreA").textContent =
+data.scoreA || 0;
+document.getElementById("scoreB").textContent =
+data.scoreB || 0;
+document.getElementById("frameA").textContent =
+data.frameA || 0;
+document.getElementById("frameB").textContent =
+data.frameB || 0;
+document.getElementById("totalA").textContent =
+data.totalA || 0;
+document.getElementById("totalB").textContent =
+data.totalB || 0;
 document.getElementById("topMessage").textContent =
 data.topMessage || "";
 document.getElementById("bottomMessage").textContent =
