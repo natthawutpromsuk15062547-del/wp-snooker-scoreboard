@@ -138,16 +138,24 @@ scoreB:(d.scoreB||0)+n
 window.frameA = async () => {
 const s = await get(ref(db,"match"));
 const d = s.val() || {};
+
+const f=(d.frameA||0)+1;
+
 await update(ref(db,"match"),{
-frameA:(d.frameA||0)+1
+frameA:f,
+Winner:f>=4 ? d.playerA : ""
 });
 };
 
 window.frameB = async () => {
 const s = await get(ref(db,"match"));
 const d = s.val() || {};
+
+const f=(d.frameB||0)+1;
+
 await update(ref(db,"match"),{
-frameB:(d.frameB||0)+1
+frameB:f,
+Winner:f>=4 ? d.playerB : ""
 });
 };
 
@@ -173,7 +181,8 @@ scoreA:0,
 scoreB:0,
 frameA:0,
 frameB:0,
-breakScore:0
+breakScore:0,
+Winner:""
 });
 };
 window.minusFrameA = async () => {
