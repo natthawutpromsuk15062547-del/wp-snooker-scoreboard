@@ -1,34 +1,114 @@
 <!DOCTYPE html>
-<html>
+<html lang="th">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>WP Snooker Control</title>
+
 <style>
 body{
-font-family:Arial;
-padding:20px;
+font-family:Arial,sans-serif;
 background:#111;
 color:white;
+padding:20px;
+text-align:center;
 }
-button{
-width:80px;
-height:60px;
-font-size:24px;
+
+h1{
+color:gold;
+}
+
+.box{
+background:#222;
+padding:15px;
+margin:15px 0;
+border-radius:10px;
+}
+
+input{
+width:90%;
+padding:10px;
+font-size:18px;
 margin:5px;
+}
+
+button{
+padding:12px;
+margin:4px;
+font-size:18px;
+border:none;
+border-radius:8px;
+}
+
+.score{
+background:#28a745;
+color:white;
+}
+
+.frame{
+background:#007bff;
+color:white;
+}
+
+.reset{
+background:#dc3545;
+color:white;
 }
 </style>
 </head>
+
 <body>
 
-<h1>WP Snooker Control</h1>
+<h1>WP Snooker Club</h1>
 
-<h2>Player A</h2>
-<button>+1</button>
-<button>+7</button>
+<div class="box">
+<h2>ผู้เล่น A</h2>
+<input id="playerA" value="นักกีฬา A">
 
-<h2>Player B</h2>
-<button>+1</button>
-<button>+7</button>
+<br>
+
+<button class="score">+1</button>
+<button class="score">+2</button>
+<button class="score">+3</button>
+<button class="score">+4</button>
+<button class="score">+5</button>
+<button class="score">+6</button>
+<button class="score">+7</button>
+
+<br><br>
+
+<button class="frame">Frame +1</button>
+</div>
+
+<div class="box">
+<h2>ผู้เล่น B</h2>
+<input id="playerB" value="นักกีฬา B">
+
+<br>
+
+<button class="score">+1</button>
+<button class="score">+2</button>
+<button class="score">+3</button>
+<button class="score">+4</button>
+<button class="score">+5</button>
+<button class="score">+6</button>
+<button class="score">+7</button>
+
+<br><br>
+
+<button class="frame">Frame +1</button>
+</div>
+
+<div class="box">
+<h2>Break</h2>
+
+<button class="score">+1</button>
+<button class="reset">Reset Break</button>
+</div>
+
+<div class="box">
+<button class="reset">Reset Match</button>
+</div>
 
 </body>
 </html>
